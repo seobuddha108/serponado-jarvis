@@ -12,7 +12,7 @@ function ScoreBadge({ score }) {
   )
 }
 
-function CompetitorCard({ url, title, score, analysis, rank, loading }) {
+function CompetitorCard({ url, title, score, analysis, rank, loading, onAnalyze }) {
   const [expanded, setExpanded] = useState(false)
   const domain = (() => { try { return new URL(url).hostname } catch { return url } })()
 
@@ -56,6 +56,18 @@ function CompetitorCard({ url, title, score, analysis, rank, loading }) {
             </a>
           </div>
         </div>
+
+        {/* ANALYZE BUTTON */}
+        {!analysis && !loading && (
+          <button onClick={e => { e.stopPropagation(); setExpanded(true); onAnalyze() }} style={{
+            background: 'rgba(0,200,255,0.08)', border: '1px solid rgba(0,200,255,0.25)',
+            color: 'var(--cyan)', padding: '0.3rem 0.75rem', borderRadius: '3px',
+            cursor: 'pointer', fontFamily: 'JetBrains Mono', fontSize: '0.65rem',
+            letterSpacing: '0.1em', flexShrink: 0,
+          }}>
+            ⚡ ANALYSE
+          </button>
+        )}
 
         {/* EXPAND */}
         <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--muted)', flexShrink: 0 }}>
@@ -242,6 +254,7 @@ export default function Competitors() {
               score={c.score || null}
               analysis={c.analysis || null}
               loading={c.analyzing || false}
+              onAnalyze={() => analyzeCompetitor(c.url, i)}
             />
           ))}
         </div>
