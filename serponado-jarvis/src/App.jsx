@@ -3,6 +3,7 @@ import Home from './components/Home.jsx'
 import Rankings from './components/Rankings.jsx'
 import Competitors from './components/Competitors.jsx'
 import Chat from './components/Chat.jsx'
+import Legal from './components/Legal.jsx'
 
 const tabs = [
   { id: 'home', label: 'START', icon: '⬡' },
@@ -72,10 +73,12 @@ export default function App() {
         ? { marginTop: '52px', flex: 1, width: '100%' }
         : { marginTop: '52px', flex: 1, padding: '2rem 1.5rem', maxWidth: '1100px', margin: '52px auto 0', width: '100%' }
       }>
-        {activeTab === 'home' && <Home />}
+        {activeTab === 'home' && <Home onLegal={setActiveTab} />}
         {activeTab === 'rankings' && <Rankings />}
         {activeTab === 'competitors' && <Competitors />}
         {activeTab === 'chat' && <Chat />}
+        {activeTab === 'datenschutz' && <Legal page="datenschutz" />}
+        {activeTab === 'impressum' && <Legal page="impressum" />}
       </main>
 
     </div>
