@@ -5,8 +5,8 @@ const WINDOW_SECONDS = 3600 // 1 hour
 const MAX_REQUESTS = 10
 
 export async function checkRateLimit(req, endpoint) {
-  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.STORAGE_URL
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.STORAGE_TOKEN
+  const url = process.env.KV_REST_API_URL
+  const token = process.env.KV_REST_API_TOKEN
 
   if (!url || !token) return { allowed: true } // fail open if Redis not configured
 
