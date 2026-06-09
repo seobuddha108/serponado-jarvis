@@ -1,0 +1,46 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #050810;
+  --surface: #0a0f1e;
+  --surface2: #0f1528;
+  --border: rgba(0,200,255,0.12);
+  --border-bright: rgba(0,200,255,0.3);
+  --cyan: #00c8ff;
+  --cyan-dim: rgba(0,200,255,0.5);
+  --cyan-glow: rgba(0,200,255,0.08);
+  --green: #00ff88;
+  --red: #ff4466;
+  --gold: #c8a96e;
+  --white: #f0f4ff;
+  --muted: rgba(240,244,255,0.4);
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,200,255,0.012) 2px, rgba(0,200,255,0.012) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+
+.mono { font-family: 'JetBrains Mono', monospace; }

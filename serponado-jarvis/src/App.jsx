@@ -1,0 +1,77 @@
+import { useState, useEffect } from 'react'
+import Rankings from './components/Rankings.jsx'
+import Competitors from './components/Competitors.jsx'
+import Chat from './components/Chat.jsx'
+
+const tabs = [
+  { id: 'rankings', label: 'RANKINGS', icon: '📊' },
+  { id: 'competitors', label: 'TEILNEHMER', icon: '🔍' },
+  { id: 'chat', label: 'JARVIS', icon: '🤖' },
+]
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState('rankings')
+  const [time, setTime] = useState(new Date())
+
+  useEffect(() => {
+    const t = setInterval(() => setTime(new Date()), 1000)
+    return () => clearInterval(t)
+  }, [])
+
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+
+      {/* NAV */}
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        background: 'rgba(5,8,16,0.97)', backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid var(--border)',
+        padding: '0 1.5rem',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        height: '52px',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <span className="mono" style={{ color: 'var(--cyan)', fontSize: '0.875rem', letterSpacing: '0.1em' }}>
+            JARVIS<span style={{ opacity: 0.4 }}>_v∞</span>
+          </span>
+          <span style={{
+            background: 'rgba(0,255,136,0.1)', border: '1px solid rgba(0,255,136,0.2)',
+            color: 'var(--green)', fontSize: '0.6rem', padding: '0.2rem 0.5rem',
+            borderRadius: '2px', fontFamily: 'JetBrains Mono', letterSpacing: '0.1em'
+          }}>ONLINE</span>
+        </div>
+
+        <div style={{ display: 'flex', gap: '0.25rem' }}>
+          {tabs.map(tab => (
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
+              background: activeTab === tab.id ? 'rgba(0,200,255,0.1)' : 'transparent',
+              border: activeTab === tab.id ? '1px solid var(--border-bright)' : '1px solid transparent',
+              color: activeTab === tab.id ? 'var(--cyan)' : 'var(--muted)',
+              padding: '0.4rem 0.875rem',
+              borderRadius: '3px',
+              cursor: 'pointer',
+              fontFamily: 'JetBrains Mono',
+              fontSize: '0.65rem',
+              letterSpacing: '0.12em',
+              transition: 'all 0.2s',
+            }}>
+              {tab.icon} {tab.label}
+            </button>
+          ))}
+        </div>
+
+        <span className="mono" style={{ fontSize: '0.65rem', color: 'var(--muted)', letterSpacing: '0.05em' }}>
+          {time.toLocaleTimeString('de-DE')}
+        </span>
+      </nav>
+
+      {/* CONTENT */}
+      <main style={{ marginTop: '52px', flex: 1, padding: '2rem 1.5rem', maxWidth: '1100px', margin: '52px auto 0', width: '100%' }}>
+        {activeTab === 'rankings' && <Rankings />}
+        {activeTab === 'competitors' && <Competitors />}
+        {activeTab === 'chat' && <Chat />}
+      </main>
+
+    </div>
+  )
+}
