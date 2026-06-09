@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Home from './components/Home.jsx'
 import Rankings from './components/Rankings.jsx'
 import Competitors from './components/Competitors.jsx'
@@ -7,37 +8,24 @@ import Legal from './components/Legal.jsx'
 import UserRankingPrompt from './components/UserRankingPrompt.jsx'
 
 const tabs = [
-  { id: 'home', label: 'START', icon: '⬡', hash: '' },
-  { id: 'rankings', label: 'RANKINGS', icon: '📊', hash: 'rankings' },
-  { id: 'teilnehmer', label: 'TEILNEHMER', icon: '🔍', hash: 'teilnehmer' },
-  { id: 'chat', label: 'JARVIS', icon: '🤖', hash: 'jarvis' },
+  { id: '/', label: 'START', icon: '⬡' },
+  { id: '/rankings', label: 'RANKINGS', icon: '📊' },
+  { id: '/teilnehmer', label: 'TEILNEHMER', icon: '🔍' },
+  { id: '/jarvis', label: 'JARVIS', icon: '🤖' },
 ]
 
-function getTabFromHash() {
-  const hash = window.location.hash.replace('#/', '').replace('#', '')
-  if (hash === 'rankings') return 'rankings'
-  if (hash === 'teilnehmer') return 'teilnehmer'
-  if (hash === 'jarvis') return 'chat'
-  if (hash === 'datenschutz') return 'datenschutz'
-  if (hash === 'impressum') return 'impressum'
-  return 'home'
-}
-
 export default function App() {
-  const [activeTab, setActiveTab] = useState(getTabFromHash)
+  const navigate = useNavigate()
+  const location = useLocation()
   const [time, setTime] = useState(new Date())
   const tabRowRef = useRef(null)
   const tabRefs = useRef({})
 
+  const activeTab = location.pathname
+
   useEffect(() => {
     const t = setInterval(() => setTime(new Date()), 1000)
     return () => clearInterval(t)
-  }, [])
-
-  useEffect(() => {
-    const onHashChange = () => setActiveTab(getTabFromHash())
-    window.addEventListener('hashchange', onHashChange)
-    return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
   useEffect(() => {
@@ -51,15 +39,7 @@ export default function App() {
     }
   }, [activeTab])
 
-  const navigate = (tab) => {
-    const found = tabs.find(t => t.id === tab)
-    if (found) {
-      window.location.hash = found.hash ? `/${found.hash}` : ''
-    } else {
-      window.location.hash = `/${tab}`
-    }
-    setActiveTab(tab)
-  }
+  const isHome = activeTab === '/'
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -126,7 +106,6 @@ export default function App() {
               </button>
             ))}
           </div>
-          {/* Fade-out hint on the right */}
           <div style={{
             position: 'absolute', top: 0, right: 0, bottom: 0, width: '48px',
             background: 'linear-gradient(to right, transparent, rgba(5,8,16,0.97))',
@@ -136,16 +115,16 @@ export default function App() {
       </nav>
 
       {/* CONTENT */}
-      <main style={activeTab === 'home'
+      <main style={isHome
         ? { marginTop: '80px', flex: 1, width: '100%' }
         : { marginTop: '80px', flex: 1, padding: '2rem 1.5rem', maxWidth: '1100px', margin: '80px auto 0', width: '100%' }
       }>
-        {activeTab === 'home' && <Home onLegal={navigate} />}
-        {activeTab === 'rankings' && <Rankings />}
-        {activeTab === 'teilnehmer' && <Competitors />}
-        {activeTab === 'chat' && <Chat />}
-        {activeTab === 'datenschutz' && <Legal page="datenschutz" />}
-        {activeTab === 'impressum' && <Legal page="impressum" />}
+        {activeTab === '/' && <Home onLegal={navigate} />}
+        {activeTab === '/rankings' && <Rankings />}
+        {activeTab === '/teilnehmer' && <Competitors />}
+        {activeTab === '/jarvis' && <Chat />}
+        {activeTab === '/datenschutz' && <Legal page="datenschutz" />}
+        {activeTab === '/impressum' && <Legal page="impressum" />}
       </main>
 
     </div>
