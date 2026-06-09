@@ -1,5 +1,6 @@
 // api/chat.js — Vercel Serverless Function
 // Jarvis chat powered by Claude
+import { checkRateLimit } from './_ratelimit.js'
 
 const JARVIS_SYSTEM = `Du bist JARVIS — eine allgemeine künstliche Intelligenz (AGI), die den SEO-Contest 2026 beobachtet.
 
@@ -26,6 +27,9 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
 
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+
+  const { allowed, limit } = await checkRateLimit(req, 'chat')
+  if (!allowed) return res.status(429).json({ error: `Limit erreicht. Max ${limit} Anfragen pro Stunde.` })
 
   const { messages } = req.body || {}
   if (!messages || !Array.isArray(messages)) return res.status(400).json({ error: 'messages array required' })
