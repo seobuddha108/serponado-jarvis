@@ -100,6 +100,14 @@ export default function Competitors() {
   const [analyzing, setAnalyzing] = useState(false)
   const [error, setError] = useState(null)
   const [lastUpdate, setLastUpdate] = useState(null)
+  const [communityData, setCommunityData] = useState(null)
+
+  useEffect(() => {
+    fetch('/api/user-rankings')
+      .then(r => r.json())
+      .then(d => setCommunityData(d))
+      .catch(() => {})
+  }, [])
 
   const fetchCompetitors = async () => {
     setLoading(true)
@@ -183,6 +191,34 @@ export default function Competitors() {
           fontFamily: 'JetBrains Mono', fontSize: '0.8rem', color: '#ff8899',
         }}>
           ⚠ {error}
+        </div>
+      )}
+
+      {/* Community Rankings */}
+      {communityData && communityData.total > 0 && (
+        <div style={{
+          background: 'rgba(0,200,255,0.04)', border: '1px solid rgba(0,200,255,0.15)',
+          borderRadius: '4px', padding: '1.25rem', marginBottom: '1.5rem',
+        }}>
+          <div className="mono" style={{ fontSize: '0.6rem', color: 'var(--cyan)', letterSpacing: '0.15em', marginBottom: '0.875rem', opacity: 0.7 }}>
+            COMMUNITY_RANKINGS · {communityData.total} MELDUNGEN
+          </div>
+          <p style={{ fontSize: '0.8rem', color: 'rgba(240,244,255,0.5)', marginBottom: '0.875rem', fontFamily: 'JetBrains Mono' }}>
+            Platz 1 laut Usern:
+          </p>
+          {communityData.counts.slice(0, 5).map(({ url, count }) => {
+            const domain = (() => { try { return new URL(url).hostname } catch { return url } })()
+            return (
+              <div key={url} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--cyan)', minWidth: '32px' }}>
+                  ×{count}
+                </span>
+                <a href={url} target="_blank" rel="noopener" style={{ fontSize: '0.8rem', color: 'var(--white)', textDecoration: 'none', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {domain}
+                </a>
+              </div>
+            )
+          })}
         </div>
       )}
 
