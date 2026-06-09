@@ -163,7 +163,7 @@ export default function Competitors() {
         // SERPONADO · TEILNEHMER-MONITOR · JARVIS ANALYSE
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
           <h1 style={{ fontFamily: 'JetBrains Mono', fontSize: '1.5rem', fontWeight: 700, color: 'var(--cyan)' }}>
             Teilnehmer-Analyse
@@ -174,7 +174,7 @@ export default function Competitors() {
             </div>
           )}
         </div>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           <button onClick={fetchCompetitors} disabled={loading} style={{
             background: 'transparent', border: '1px solid var(--border-bright)',
             color: 'var(--cyan)', padding: '0.5rem 1rem', borderRadius: '3px',
