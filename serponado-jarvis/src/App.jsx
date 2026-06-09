@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react'
+import Home from './components/Home.jsx'
 import Rankings from './components/Rankings.jsx'
 import Competitors from './components/Competitors.jsx'
 import Chat from './components/Chat.jsx'
 
 const tabs = [
+  { id: 'home', label: 'START', icon: '⬡' },
   { id: 'rankings', label: 'RANKINGS', icon: '📊' },
   { id: 'competitors', label: 'TEILNEHMER', icon: '🔍' },
   { id: 'chat', label: 'JARVIS', icon: '🤖' },
 ]
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('rankings')
+  const [activeTab, setActiveTab] = useState('home')
   const [time, setTime] = useState(new Date())
 
   useEffect(() => {
@@ -66,7 +68,11 @@ export default function App() {
       </nav>
 
       {/* CONTENT */}
-      <main style={{ marginTop: '52px', flex: 1, padding: '2rem 1.5rem', maxWidth: '1100px', margin: '52px auto 0', width: '100%' }}>
+      <main style={activeTab === 'home'
+        ? { marginTop: '52px', flex: 1, width: '100%' }
+        : { marginTop: '52px', flex: 1, padding: '2rem 1.5rem', maxWidth: '1100px', margin: '52px auto 0', width: '100%' }
+      }>
+        {activeTab === 'home' && <Home />}
         {activeTab === 'rankings' && <Rankings />}
         {activeTab === 'competitors' && <Competitors />}
         {activeTab === 'chat' && <Chat />}
