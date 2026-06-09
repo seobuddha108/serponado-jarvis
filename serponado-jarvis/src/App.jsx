@@ -7,20 +7,46 @@ import Legal from './components/Legal.jsx'
 import UserRankingPrompt from './components/UserRankingPrompt.jsx'
 
 const tabs = [
-  { id: 'home', label: 'START', icon: '⬡' },
-  { id: 'rankings', label: 'RANKINGS', icon: '📊' },
-  { id: 'competitors', label: 'TEILNEHMER', icon: '🔍' },
-  { id: 'chat', label: 'JARVIS', icon: '🤖' },
+  { id: 'home', label: 'START', icon: '⬡', hash: '' },
+  { id: 'rankings', label: 'RANKINGS', icon: '📊', hash: 'rankings' },
+  { id: 'teilnehmer', label: 'TEILNEHMER', icon: '🔍', hash: 'teilnehmer' },
+  { id: 'chat', label: 'JARVIS', icon: '🤖', hash: 'jarvis' },
 ]
 
+function getTabFromHash() {
+  const hash = window.location.hash.replace('#/', '').replace('#', '')
+  if (hash === 'rankings') return 'rankings'
+  if (hash === 'teilnehmer') return 'teilnehmer'
+  if (hash === 'jarvis') return 'chat'
+  if (hash === 'datenschutz') return 'datenschutz'
+  if (hash === 'impressum') return 'impressum'
+  return 'home'
+}
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState('home')
+  const [activeTab, setActiveTab] = useState(getTabFromHash)
   const [time, setTime] = useState(new Date())
 
   useEffect(() => {
     const t = setInterval(() => setTime(new Date()), 1000)
     return () => clearInterval(t)
   }, [])
+
+  useEffect(() => {
+    const onHashChange = () => setActiveTab(getTabFromHash())
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  const navigate = (tab) => {
+    const found = tabs.find(t => t.id === tab)
+    if (found) {
+      window.location.hash = found.hash ? `/${found.hash}` : ''
+    } else {
+      window.location.hash = `/${tab}`
+    }
+    setActiveTab(tab)
+  }
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -48,7 +74,7 @@ export default function App() {
 
         <div style={{ display: 'flex', gap: '0.25rem' }}>
           {tabs.map(tab => (
-            <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
+            <button key={tab.id} onClick={() => navigate(tab.id)} style={{
               background: activeTab === tab.id ? 'rgba(0,200,255,0.12)' : 'transparent',
               border: activeTab === tab.id ? '1px solid rgba(0,200,255,0.5)' : '1px solid transparent',
               color: activeTab === tab.id ? '#00c8ff' : 'rgba(240,244,255,0.75)',
@@ -76,9 +102,9 @@ export default function App() {
         ? { marginTop: '52px', flex: 1, width: '100%' }
         : { marginTop: '52px', flex: 1, padding: '2rem 1.5rem', maxWidth: '1100px', margin: '52px auto 0', width: '100%' }
       }>
-        {activeTab === 'home' && <Home onLegal={setActiveTab} />}
+        {activeTab === 'home' && <Home onLegal={navigate} />}
         {activeTab === 'rankings' && <Rankings />}
-        {activeTab === 'competitors' && <Competitors />}
+        {activeTab === 'teilnehmer' && <Competitors />}
         {activeTab === 'chat' && <Chat />}
         {activeTab === 'datenschutz' && <Legal page="datenschutz" />}
         {activeTab === 'impressum' && <Legal page="impressum" />}
