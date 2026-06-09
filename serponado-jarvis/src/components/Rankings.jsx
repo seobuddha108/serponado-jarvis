@@ -147,8 +147,11 @@ export default function Rankings() {
 
           {/* Stats bar */}
           {results.length > 0 && (
-            <div style={{ fontSize: '13px', color: '#70757a', marginBottom: '16px' }}>
-              Ungefähr {results.length * 847}.000 Ergebnisse (0,{Math.floor(Math.random() * 50) + 20} Sekunden)
+            <div style={{ fontSize: '13px', color: '#70757a', marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+              <span>Ungefähr {results.length * 847}.000 Ergebnisse (0,{Math.floor(Math.random() * 50) + 20} Sekunden)</span>
+              <span style={{ fontSize: '11px', color: '#aaa', fontStyle: 'italic' }}>
+                * Abgefragt via DataForSEO · kann von deiner persönlichen Google-Ansicht abweichen
+              </span>
             </div>
           )}
 
