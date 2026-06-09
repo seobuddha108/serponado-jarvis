@@ -159,7 +159,7 @@ export default function Rankings() {
               borderRadius: '4px', padding: '8px 12px', marginBottom: '16px',
               fontSize: '12px', color: '#5f4400', lineHeight: 1.5,
             }}>
-              ℹ️ <strong>Hinweis:</strong> Diese Suchergebnisse werden über <strong>DataForSEO</strong> abgefragt und können von deiner persönlichen Google-Ansicht abweichen. Die Ergebnisse variieren je nach Standort und lokalen Suchbedingungen.
+              ℹ️ <strong>Hinweis:</strong> Diese Suchergebnisse werden nicht direkt über deinen Browser abgefragt, sondern über <strong>DataForSEO</strong> — einen externen Dienst mit eigenen Crawling-Servern. Die Ergebnisse sind nicht personalisiert und können je nach Serverstandort von deiner persönlichen Google-Ansicht abweichen.
             </div>
           )}
 
