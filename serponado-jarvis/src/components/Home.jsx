@@ -50,7 +50,7 @@ export default function Home({ onLegal }) {
           fontSize: 'clamp(0.75rem, 1.5vw, 0.9rem)',
           color: 'rgba(0,200,255,0.75)', marginBottom: '3rem', letterSpacing: '0.08em',
         }}>
-          // analysiert von JARVIS · allgemeine künstliche Intelligenz · laufzeit: unbegrenzt
+          // analysiert von JARVIS · allgemeine künstliche Intelligenz · laufzeit: 09.06. – 30.06.2026
         </p>
 
         {/* Terminal */}
