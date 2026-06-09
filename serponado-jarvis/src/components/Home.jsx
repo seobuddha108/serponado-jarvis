@@ -13,22 +13,23 @@ export default function Home({ onLegal }) {
         {/* Grid background */}
         <div style={{
           position: 'absolute', inset: 0,
-          backgroundImage: 'linear-gradient(rgba(0,200,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,255,0.04) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(0,200,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,255,0.07) 1px, transparent 1px)',
           backgroundSize: '60px 60px', pointerEvents: 'none',
         }} />
         <div style={{
           position: 'absolute', top: '30%', left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '600px', height: '400px',
-          background: 'radial-gradient(ellipse, rgba(0,200,255,0.06) 0%, transparent 70%)',
+          width: '800px', height: '500px',
+          background: 'radial-gradient(ellipse, rgba(0,200,255,0.12) 0%, transparent 70%)',
           pointerEvents: 'none',
         }} />
 
         <div style={{
           fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem',
           color: 'var(--cyan)', letterSpacing: '0.2em', textTransform: 'uppercase',
-          border: '1px solid var(--border)', padding: '0.4rem 1rem',
+          border: '1px solid rgba(0,200,255,0.4)', padding: '0.4rem 1rem',
           borderRadius: '2px', marginBottom: '2rem', position: 'relative',
+          background: 'rgba(0,200,255,0.06)',
         }}>
           {'> '}Beobachtungsprotokoll #2026-SEO-CONTEST
         </div>
@@ -36,26 +37,28 @@ export default function Home({ onLegal }) {
         <h1 style={{
           fontFamily: 'JetBrains Mono, monospace',
           fontSize: 'clamp(3.5rem, 12vw, 8rem)',
-          fontWeight: 700, color: 'var(--white)',
+          fontWeight: 700, color: '#ffffff',
           lineHeight: 1, letterSpacing: '-0.02em',
           marginBottom: '0.5rem', position: 'relative',
+          textShadow: '0 0 60px rgba(0,200,255,0.15)',
         }}>
-          <span style={{ color: 'var(--cyan)' }}>Serp</span>onado
+          <span style={{ color: 'var(--cyan)', textShadow: '0 0 40px rgba(0,200,255,0.5)' }}>Serp</span>onado
         </h1>
 
         <p style={{
           fontFamily: 'JetBrains Mono, monospace',
           fontSize: 'clamp(0.75rem, 1.5vw, 0.9rem)',
-          color: 'var(--cyan-dim)', marginBottom: '3rem', letterSpacing: '0.08em',
+          color: 'rgba(0,200,255,0.75)', marginBottom: '3rem', letterSpacing: '0.08em',
         }}>
           // analysiert von JARVIS · allgemeine künstliche Intelligenz · laufzeit: unbegrenzt
         </p>
 
         {/* Terminal */}
         <div style={{
-          background: 'var(--surface)', border: '1px solid var(--border)',
+          background: '#0d1424', border: '1px solid rgba(0,200,255,0.25)',
           borderRadius: '4px', padding: '1.5rem 2rem',
           maxWidth: '680px', width: '100%', textAlign: 'left',
+          boxShadow: '0 0 40px rgba(0,200,255,0.06)',
         }}>
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem' }}>
             {['#ff5f56','#ffbd2e','#27c93f'].map((c,i) => (
