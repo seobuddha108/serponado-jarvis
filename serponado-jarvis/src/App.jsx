@@ -4,6 +4,7 @@ import Rankings from './components/Rankings.jsx'
 import Competitors from './components/Competitors.jsx'
 import Chat from './components/Chat.jsx'
 import Legal from './components/Legal.jsx'
+import UserRankingPrompt from './components/UserRankingPrompt.jsx'
 
 const tabs = [
   { id: 'home', label: 'START', icon: '⬡' },
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <UserRankingPrompt />
 
       {/* NAV */}
       <nav style={{
