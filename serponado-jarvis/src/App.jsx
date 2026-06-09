@@ -28,7 +28,7 @@ export default function App() {
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         background: 'rgba(5,8,16,0.97)', backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid var(--border)',
+        borderBottom: '1px solid rgba(0,200,255,0.2)',
         padding: '0 1.5rem',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         height: '52px',
@@ -47,16 +47,17 @@ export default function App() {
         <div style={{ display: 'flex', gap: '0.25rem' }}>
           {tabs.map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
-              background: activeTab === tab.id ? 'rgba(0,200,255,0.1)' : 'transparent',
-              border: activeTab === tab.id ? '1px solid var(--border-bright)' : '1px solid transparent',
-              color: activeTab === tab.id ? 'var(--cyan)' : 'var(--muted)',
+              background: activeTab === tab.id ? 'rgba(0,200,255,0.12)' : 'transparent',
+              border: activeTab === tab.id ? '1px solid rgba(0,200,255,0.5)' : '1px solid transparent',
+              color: activeTab === tab.id ? '#00c8ff' : 'rgba(240,244,255,0.75)',
               padding: '0.4rem 0.875rem',
               borderRadius: '3px',
               cursor: 'pointer',
               fontFamily: 'JetBrains Mono',
-              fontSize: '0.65rem',
+              fontSize: '0.7rem',
               letterSpacing: '0.12em',
               transition: 'all 0.2s',
+              textShadow: activeTab === tab.id ? '0 0 12px rgba(0,200,255,0.6)' : 'none',
             }}>
               {tab.icon} {tab.label}
             </button>
