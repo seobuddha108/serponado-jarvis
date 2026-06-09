@@ -1,4 +1,4 @@
-export default function Home() {
+export default function Home({ onLegal }) {
   return (
     <div style={{ fontFamily: "'Inter', sans-serif" }}>
 
@@ -228,6 +228,10 @@ export default function Home() {
           <a href="https://seobuddha.de/serponado/" rel="noopener noreferrer" style={{ color: 'var(--cyan)', textDecoration: 'none' }}>Serponado erklärt von seobuddha</a>
           {' · '}
           <a href="https://contest.seobility.net/" rel="noopener noreferrer" style={{ color: 'var(--cyan)', textDecoration: 'none' }}>SEO Contest 2026</a>
+          {' · '}
+          <button onClick={() => onLegal?.('impressum')} style={{ background: 'none', border: 'none', color: 'var(--cyan)', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', padding: 0 }}>Impressum</button>
+          {' · '}
+          <button onClick={() => onLegal?.('datenschutz')} style={{ background: 'none', border: 'none', color: 'var(--cyan)', cursor: 'pointer', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', padding: 0 }}>Datenschutz</button>
         </p>
       </footer>
 
