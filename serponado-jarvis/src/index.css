@@ -57,24 +57,33 @@ body::before {
   100% { background-position: 0% -50%; }
 }
 
+@keyframes share-pulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(0,200,255,0.3), 0 0 14px rgba(0,200,255,0.1); border-color: rgba(0,200,255,0.5); }
+  50%       { box-shadow: 0 0 12px rgba(0,200,255,0.6), 0 0 28px rgba(0,200,255,0.2); border-color: rgba(0,200,255,0.9); }
+}
+
 .share-btn {
   position: relative;
   overflow: hidden;
-  background: transparent;
-  border: 1px solid rgba(0,200,255,0.2);
-  color: rgba(240,244,255,0.4);
+  background: rgba(0,200,255,0.06);
+  border: 1px solid rgba(0,200,255,0.5);
+  color: var(--cyan);
   padding: 0.2rem 0.6rem;
   border-radius: 2px;
   cursor: pointer;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.6rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 8px rgba(0,200,255,0.6);
+  animation: share-pulse 2.5s ease-in-out infinite;
   will-change: transform, box-shadow, color, border-color;
 }
 
 .share-btn:hover {
-  border-color: rgba(0,200,255,0.5);
-  color: var(--cyan);
+  background: rgba(0,200,255,0.14);
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px rgba(0,200,255,0.7), 0 0 40px rgba(0,200,255,0.25);
+  animation: none;
 }
 
 .share-btn.copied {
