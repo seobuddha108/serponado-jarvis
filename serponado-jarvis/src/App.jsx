@@ -27,6 +27,9 @@ export default function App() {
 
   const shareUrl = async () => {
     const url = window.location.href
+    setCopied(true)
+    setCopyCount(n => n + 1)
+    setTimeout(() => setCopied(false), 2000)
     if (navigator.share) {
       try { await navigator.share({ url }) } catch { /* cancelled */ }
     } else {
@@ -42,9 +45,6 @@ export default function App() {
         document.body.removeChild(el)
       }
     }
-    setCopied(true)
-    setCopyCount(n => n + 1)
-    setTimeout(() => setCopied(false), 2000)
   }
 
   const activeTab = location.pathname
