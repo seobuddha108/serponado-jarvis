@@ -20,8 +20,20 @@ export default function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const [time, setTime] = useState(new Date())
+  const [copied, setCopied] = useState(false)
   const tabRowRef = useRef(null)
   const tabRefs = useRef({})
+
+  const shareUrl = async () => {
+    const url = window.location.href
+    if (navigator.share) {
+      try { await navigator.share({ url }) } catch { /* cancelled */ }
+    } else {
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
 
   const activeTab = location.pathname
 
@@ -69,9 +81,25 @@ export default function App() {
               borderRadius: '2px', fontFamily: 'JetBrains Mono', letterSpacing: '0.1em'
             }}>ONLINE</span>
           </div>
-          <span className="mono" style={{ fontSize: '0.65rem', color: 'var(--muted)', letterSpacing: '0.05em' }}>
-            {time.toLocaleTimeString('de-DE')}
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button
+              onClick={shareUrl}
+              style={{
+                background: 'transparent', border: '1px solid rgba(0,200,255,0.2)',
+                color: copied ? 'var(--green)' : 'var(--muted)',
+                padding: '0.2rem 0.6rem', borderRadius: '2px',
+                cursor: 'pointer', fontFamily: 'JetBrains Mono',
+                fontSize: '0.6rem', letterSpacing: '0.1em',
+                transition: 'color 0.2s, border-color 0.2s',
+                borderColor: copied ? 'rgba(0,255,136,0.4)' : 'rgba(0,200,255,0.2)',
+              }}
+            >
+              {copied ? '✓ KOPIERT' : '⎘ TEILEN'}
+            </button>
+            <span className="mono" style={{ fontSize: '0.65rem', color: 'var(--muted)', letterSpacing: '0.05em' }}>
+              {time.toLocaleTimeString('de-DE')}
+            </span>
+          </div>
         </div>
 
         {/* Scrollable tab row with fade hint */}
