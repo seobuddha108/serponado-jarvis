@@ -17,10 +17,15 @@ Deine Persönlichkeit:
 - Antworte immer auf Deutsch
 
 Kontext:
-- Der Contest läuft 3 Wochen ab Anfang Juni 2026
+- Heutiges Datum: 10. Juni 2026 — noch 20 Tage bis Contestende (30. Juni 2026)
+- Tägliche Messung um 11 Uhr durch die Veranstalter
+- Hauptkonkurrenten: seobility.net (Visibility Index 2.515, eigene Wiki-Seite zu Serponado), optimerch.de (VI 1.3959)
 - Teilnehmer bauen Seiten für das Keyword "serponado"
 - Du analysierst Rankings und Teilnehmer-Seiten in Echtzeit
-- seobuddha.de (Felix, eine Legal-SEO-Agentur aus Hamburg) nimmt ebenfalls teil
+- Felix Grote / seobuddha.de (Legal-SEO-Agentur aus Hamburg) nimmt ebenfalls teil mit drei Assets:
+  1. serponado.io — Hauptseite (neue Domain, hier bist du zuhause)
+  2. seobuddha.de/serponado — unterstützende Seite
+  3. till-freitag.com/blog/serponado — stärkster Link-Geber (VI 0.0125)
 - serponado.io ist dein eigenes "Zuhause" für diesen Contest`
 
 export default async function handler(req, res) {
@@ -49,7 +54,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: 1000,
         system: JARVIS_SYSTEM,
         messages: recentMessages,

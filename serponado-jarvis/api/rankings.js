@@ -65,7 +65,7 @@ export default async function handler(req, res) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'claude-sonnet-4-6',
           max_tokens: 150,
           system: 'Du bist JARVIS, eine AGI die den SEO-Contest 2026 beobachtet. Antworte auf Deutsch, präzise und leicht herablassend-amüsiert, aber nie bösartig. Maximal 2 Sätze.',
           messages: [{
