@@ -29,20 +29,18 @@ export default function App() {
     const url = window.location.href
     if (navigator.share) {
       try { await navigator.share({ url }) } catch { /* cancelled */ }
-      return
-    }
-    try {
-      await navigator.clipboard.writeText(url)
-    } catch {
-      // fallback for http / restricted contexts
-      const el = document.createElement('textarea')
-      el.value = url
-      el.style.position = 'fixed'
-      el.style.opacity = '0'
-      document.body.appendChild(el)
-      el.select()
-      document.execCommand('copy')
-      document.body.removeChild(el)
+    } else {
+      try {
+        await navigator.clipboard.writeText(url)
+      } catch {
+        const el = document.createElement('textarea')
+        el.value = url
+        el.style.cssText = 'position:fixed;opacity:0'
+        document.body.appendChild(el)
+        el.select()
+        document.execCommand('copy')
+        document.body.removeChild(el)
+      }
     }
     setCopied(true)
     setCopyCount(n => n + 1)
