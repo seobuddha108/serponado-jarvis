@@ -1,6 +1,7 @@
 // api/backlinks.js — Vercel Serverless Function
 // GET:  returns all known backlinks to serponado.io (seed + KV)
 // POST: submit a new backlink URL for the wall
+import { checkRateLimit } from './_ratelimit.js'
 
 const SEED = [
   {
@@ -71,9 +72,12 @@ export default async function handler(req, res) {
 
   // POST — submit a new backlink
   if (req.method === 'POST') {
+    const { allowed, limit } = await checkRateLimit(req, 'backlinks')
+    if (!allowed) return res.status(429).json({ error: `Limit erreicht. Max ${limit} Anfragen pro Stunde.` })
+
     const { url, anchor, vi: submittedVi } = req.body || {}
-    if (!url || typeof url !== 'string') {
-      return res.status(400).json({ error: 'url required' })
+    if (!url || typeof url !== 'string' || url.length > 2048) {
+      return res.status(400).json({ error: 'url required (max 2048 chars)' })
     }
 
     let normalized
@@ -81,14 +85,14 @@ export default async function handler(req, res) {
     catch { return res.status(400).json({ error: 'Invalid URL' }) }
 
     const domain = new URL(normalized).hostname.replace(/^www\./, '')
-    const vi = typeof submittedVi === 'number' ? submittedVi : 0
+    const vi = 0 // VI always 0 for user submissions; verified manually
     const tier = getTier(vi)
 
     const entry = {
       id: `${domain}-${Date.now()}`,
       linkFrom: normalized,
       domain,
-      anchor: anchor || domain,
+      anchor: anchor ? String(anchor).slice(0, 100) : domain,
       vi,
       tier,
       addedAt: new Date().toISOString().slice(0, 10),

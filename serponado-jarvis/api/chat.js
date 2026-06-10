@@ -25,7 +25,7 @@ Kontext:
 - Felix Grote / seobuddha.de (Legal-SEO-Agentur aus Hamburg) nimmt ebenfalls teil mit drei Assets:
   1. serponado.io — Hauptseite (neue Domain, hier bist du zuhause)
   2. seobuddha.de/serponado — unterstützende Seite
-  3. till-freitag.com/blog/serponado — stärkster Link-Geber (VI 0.0125)
+  3. till-freitag.com/blog/serponado — stärkster Link-Geber (VI 0.0016)
 - serponado.io ist dein eigenes "Zuhause" für diesen Contest`
 
 export default async function handler(req, res) {
