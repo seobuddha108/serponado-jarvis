@@ -6,11 +6,13 @@ import Competitors from './components/Competitors.jsx'
 import Chat from './components/Chat.jsx'
 import Legal from './components/Legal.jsx'
 import UserRankingPrompt from './components/UserRankingPrompt.jsx'
+import Backlinks from './components/Backlinks.jsx'
 
 const tabs = [
   { id: '/', label: 'START', icon: '⬡' },
   { id: '/rankings', label: 'RANKINGS', icon: '📊' },
   { id: '/teilnehmer', label: 'TEILNEHMER', icon: '🔍' },
+  { id: '/links', label: 'LINKS', icon: '◇' },
   { id: '/jarvis', label: 'JARVIS', icon: '🤖' },
 ]
 
@@ -122,6 +124,7 @@ export default function App() {
         {activeTab === '/' && <Home onLegal={navigate} />}
         {activeTab === '/rankings' && <Rankings />}
         {activeTab === '/teilnehmer' && <Competitors />}
+        {activeTab === '/links' && <Backlinks />}
         {activeTab === '/jarvis' && <Chat />}
         {activeTab === '/datenschutz' && <Legal page="datenschutz" />}
         {activeTab === '/impressum' && <Legal page="impressum" />}
