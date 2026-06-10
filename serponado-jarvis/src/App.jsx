@@ -20,6 +20,7 @@ export default function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const [time, setTime] = useState(new Date())
+  const [copyCount, setCopyCount] = useState(0)
   const [copied, setCopied] = useState(false)
   const tabRowRef = useRef(null)
   const tabRefs = useRef({})
@@ -28,11 +29,24 @@ export default function App() {
     const url = window.location.href
     if (navigator.share) {
       try { await navigator.share({ url }) } catch { /* cancelled */ }
-    } else {
-      await navigator.clipboard.writeText(url)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      return
     }
+    try {
+      await navigator.clipboard.writeText(url)
+    } catch {
+      // fallback for http / restricted contexts
+      const el = document.createElement('textarea')
+      el.value = url
+      el.style.position = 'fixed'
+      el.style.opacity = '0'
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
+    }
+    setCopied(true)
+    setCopyCount(n => n + 1)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   const activeTab = location.pathname
@@ -83,6 +97,7 @@ export default function App() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button
+              key={copyCount}
               onClick={shareUrl}
               className={`share-btn${copied ? ' copied' : ''}`}
             >
