@@ -84,15 +84,7 @@ export default function App() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button
               onClick={shareUrl}
-              style={{
-                background: 'transparent', border: '1px solid rgba(0,200,255,0.2)',
-                color: copied ? 'var(--green)' : 'var(--muted)',
-                padding: '0.2rem 0.6rem', borderRadius: '2px',
-                cursor: 'pointer', fontFamily: 'JetBrains Mono',
-                fontSize: '0.6rem', letterSpacing: '0.1em',
-                transition: 'color 0.2s, border-color 0.2s',
-                borderColor: copied ? 'rgba(0,255,136,0.4)' : 'rgba(0,200,255,0.2)',
-              }}
+              className={`share-btn${copied ? ' copied' : ''}`}
             >
               {copied ? '✓ KOPIERT' : '⎘ TEILEN'}
             </button>
