@@ -65,8 +65,11 @@ export default async function handler(req, res) {
   const syncSecret  = process.env.SYNC_SECRET
   const authHeader  = req.headers.authorization || ''
 
-  const isCron   = cronSecret  && authHeader === `Bearer ${cronSecret}`
-  const isManual = syncSecret  && req.query.secret === syncSecret
+  const urlParams   = new URL(req.url, 'https://placeholder').searchParams
+  const secretParam = urlParams.get('secret')
+
+  const isCron   = cronSecret && authHeader === `Bearer ${cronSecret}`
+  const isManual = syncSecret && secretParam === syncSecret
 
   if (!isCron && !isManual) {
     return res.status(401).json({ error: 'Unauthorized' })
