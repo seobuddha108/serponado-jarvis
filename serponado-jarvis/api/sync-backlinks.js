@@ -69,7 +69,7 @@ export default async function handler(req, res) {
   const secretParam = urlParams.get('secret') || req.body?.secret || ''
 
   const isCron   = cronSecret && authHeader === `Bearer ${cronSecret}`
-  const isManual = syncSecret && secretParam === syncSecret
+  const isManual = syncSecret && secretParam.trim() === syncSecret.trim()
 
   if (!isCron && !isManual) {
     return res.status(401).json({ error: 'Unauthorized', debug: { hasSync: !!syncSecret, hasCron: !!cronSecret, param: !!secretParam } })
