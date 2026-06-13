@@ -3,7 +3,6 @@
     { "path": "/api/sync-backlinks", "schedule": "0 7 * * *" }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/((?!api|_next|assets|favicon|manifest|robots|sitemap).*)", "destination": "/index.html" }
   ],
   "headers": [

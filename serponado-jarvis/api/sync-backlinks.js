@@ -66,13 +66,13 @@ export default async function handler(req, res) {
   const authHeader  = req.headers.authorization || ''
 
   const urlParams   = new URL(req.url, 'https://placeholder').searchParams
-  const secretParam = urlParams.get('secret')
+  const secretParam = urlParams.get('secret') || req.body?.secret || ''
 
   const isCron   = cronSecret && authHeader === `Bearer ${cronSecret}`
   const isManual = syncSecret && secretParam === syncSecret
 
   if (!isCron && !isManual) {
-    return res.status(401).json({ error: 'Unauthorized' })
+    return res.status(401).json({ error: 'Unauthorized', debug: { hasSync: !!syncSecret, hasCron: !!cronSecret, param: !!secretParam } })
   }
 
   const login        = process.env.DATAFORSEO_LOGIN
