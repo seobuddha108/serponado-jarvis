@@ -72,16 +72,7 @@ export default async function handler(req, res) {
   const isManual = syncSecret && secretParam.trim() === syncSecret.trim()
 
   if (!isCron && !isManual) {
-    return res.status(401).json({
-      error: 'Unauthorized',
-      debug: {
-        hasSync: !!syncSecret,
-        hasCron: !!cronSecret,
-        paramReceived: secretParam,
-        syncLen: syncSecret?.trim().length,
-        paramLen: secretParam?.trim().length,
-      }
-    })
+    return res.status(401).json({ error: 'Unauthorized' })
   }
 
   const login        = process.env.DATAFORSEO_LOGIN
