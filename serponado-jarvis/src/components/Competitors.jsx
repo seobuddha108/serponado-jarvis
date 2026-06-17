@@ -218,7 +218,7 @@ export default function Competitors() {
           <p style={{ fontSize: '0.8rem', color: 'rgba(240,244,255,0.5)', marginBottom: '0.875rem', fontFamily: 'JetBrains Mono' }}>
             Platz 1 laut Usern:
           </p>
-          {communityData.counts.slice(0, 5).map(({ url, count }) => {
+          {communityData.counts.map(({ url, count }) => {
             const domain = (() => { try { return new URL(url).hostname } catch { return url } })()
             return (
               <div key={url} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
