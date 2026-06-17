@@ -81,12 +81,6 @@ function LinkCard({ link, rank }) {
               {link.domain}
             </span>
             <TierBadge tier={link.tier} />
-            <span style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.2rem',
-              fontFamily: 'JetBrains Mono', fontSize: '0.55rem', letterSpacing: '0.12em',
-              color: 'var(--green)', border: '1px solid rgba(0,255,136,0.3)',
-              background: 'rgba(0,255,136,0.06)', padding: '0.15rem 0.45rem', borderRadius: '2px',
-            }}>↔ GEGENSEITIG</span>
           </div>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
             <ViBadge vi={link.vi} />
@@ -119,7 +113,7 @@ function LinkCard({ link, rank }) {
             <a
               href={link.linkFrom}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow ugc noopener noreferrer"
               onClick={e => e.stopPropagation()}
               style={{ fontSize: '0.8rem', color: tier.color, wordBreak: 'break-all', textDecoration: 'none' }}
               onMouseEnter={e => e.target.style.textDecoration = 'underline'}
@@ -172,7 +166,7 @@ function SubmitForm({ onSubmitted }) {
   if (status === 'ok') {
     return (
       <div className="mono" style={{ fontSize: '0.8rem', color: 'var(--green)', padding: '1rem 0', textAlign: 'center' }}>
-        ✓ Link eingereicht. Deine Domain erscheint bald in der Liste — und bekommt einen Backlink zurück.
+        ✓ Link eingereicht. JARVIS analysiert deine Domain und trägt sie in den Hall of Fame ein.
       </div>
     )
   }
@@ -265,10 +259,10 @@ export default function Backlinks() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
           <div className="mono" style={{ fontSize: '0.65rem', color: 'var(--cyan)', letterSpacing: '0.2em', opacity: 0.7, marginBottom: '0.5rem' }}>
-            // LINK-NETZWERK · SERPONADO.IO · GEGENSEITIGE VERLINKUNG
+            // BACKLINK HALL OF FAME · SERPONADO.IO
           </div>
           <h1 style={{ fontFamily: 'JetBrains Mono', fontSize: '1.5rem', fontWeight: 700, color: 'var(--cyan)', margin: 0 }}>
-            Link-Partner
+            Link-Profil
           </h1>
           {links.length > 0 && (
             <div className="mono" style={{ fontSize: '0.65rem', color: 'var(--muted)', marginTop: '0.35rem' }}>
@@ -320,12 +314,12 @@ export default function Backlinks() {
           borderRadius: '0 4px 4px 0', marginBottom: '1.5rem',
         }}>
           <div className="mono" style={{ fontSize: '0.55rem', color: 'var(--cyan)', marginBottom: '0.4rem', letterSpacing: '0.15em', opacity: 0.6 }}>
-            JARVIS_NETZWERK_ANALYSE
+            JARVIS_LINK_ANALYSE
           </div>
           <p className="mono" style={{ fontSize: '0.8125rem', color: 'var(--white)', fontStyle: 'italic', lineHeight: 1.6, margin: 0 }}>
             {links.length === 1
-              ? 'Eine Partnerschaft. Diese Domain verlinkt auf serponado.io — und serponado.io verlinkt zurück. Gegenseitige Verlinkung unter Contest-Teilnehmern: das ist kein Zufall, das ist Strategie.'
-              : `${links.length} Link-Partner. Jeder dieser Domains verlinkt auf serponado.io und erhält einen Backlink zurück. Ein wachsendes Netzwerk — ich beobachte die Tier-Balance und Anchor-Diversität mit der nötigen Präzision.`
+              ? 'Eine Referring Domain. Der Anfang ist gemacht. Bei einem Link-Profil-Aufbau zählt Qualität mehr als Quantität — was nicht bedeutet, dass Quantität egal ist.'
+              : `${links.length} Referring Domains. Das Link-Profil wächst. Ich beobachte die Anchor-Text-Verteilung und die Tier-Balance mit der Aufmerksamkeit, die diese Daten verdienen.`
             }
           </p>
         </div>
@@ -357,11 +351,31 @@ export default function Backlinks() {
 
       {/* Submit form */}
       <div style={{ marginTop: '2.5rem' }}>
-        <div className="mono" style={{ fontSize: '0.65rem', color: 'var(--green)', letterSpacing: '0.1em', marginBottom: '0.4rem', opacity: 0.9 }}>
-          // Verlinke auf serponado.io → erhalte einen Backlink zurück
+        <div style={{
+          background: 'rgba(0,200,255,0.04)', border: '1px solid rgba(0,200,255,0.15)',
+          borderRadius: '4px', padding: '1rem 1.25rem', marginBottom: '1rem',
+        }}>
+          <div className="mono" style={{ fontSize: '0.55rem', color: 'var(--cyan)', letterSpacing: '0.15em', marginBottom: '0.6rem', opacity: 0.6 }}>
+            WARUM HIER EINTRAGEN?
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            {[
+              ['◈', 'JARVIS-Analyse', 'Deine Domain wird von JARVIS bewertet und eingestuft (Platinum bis Iron).'],
+              ['◆', 'Hall of Fame', 'Sichtbarkeit im Backlink-Profil das andere Contest-Teilnehmer täglich checken.'],
+              ['◇', 'Tier-Badge', 'Dein Visibility Index bestimmt deinen Rang — öffentlich, nachvollziehbar.'],
+            ].map(([icon, label, desc]) => (
+              <div key={label} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                <span className="mono" style={{ color: 'var(--cyan)', fontSize: '0.75rem', flexShrink: 0, marginTop: '0.1rem' }}>{icon}</span>
+                <div>
+                  <span className="mono" style={{ fontSize: '0.65rem', color: 'var(--white)', letterSpacing: '0.08em' }}>{label}</span>
+                  <span className="mono" style={{ fontSize: '0.65rem', color: 'var(--muted)', marginLeft: '0.5rem' }}>— {desc}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="mono" style={{ fontSize: '0.6rem', color: 'var(--muted)', letterSpacing: '0.08em', marginBottom: '0.75rem', opacity: 0.6 }}>
-          // Alle gemeldeten Links erscheinen hier und werden von serponado.io verlinkt.
+          // Du verlinkst auf serponado.io? Melde deinen Link:
         </div>
         <SubmitForm onSubmitted={fetchLinks} />
       </div>
