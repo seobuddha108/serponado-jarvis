@@ -365,7 +365,7 @@ export default function Backlinks() {
             marginBottom: '1rem',
           }}>
             <div className="mono" style={{ fontSize: '0.6rem', color: 'var(--cyan)', letterSpacing: '0.18em', opacity: 0.6 }}>
-              // COMMUNITY-LINKS · VON TEILNEHMERN GEMELDET
+              // COMMUNITY-LINKS · VON ANDEREN ERWÄHNT
             </div>
             <div style={{
               fontFamily: 'JetBrains Mono', fontSize: '0.55rem', letterSpacing: '0.12em',
@@ -390,7 +390,7 @@ export default function Backlinks() {
                   background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.2)',
                   padding: '0.15rem 0.45rem', borderRadius: '2px', flexShrink: 0,
                 }}>
-                  {count}× gemeldet
+                  {count}× erwähnt
                 </span>
                 <a
                   href={url}
