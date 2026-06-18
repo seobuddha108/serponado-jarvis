@@ -230,6 +230,7 @@ function SubmitForm({ onSubmitted }) {
 
 export default function Backlinks() {
   const [links, setLinks] = useState([])
+  const [communityLinks, setCommunityLinks] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -237,10 +238,17 @@ export default function Backlinks() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('/api/backlinks')
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      const data = await res.json()
-      setLinks(data.backlinks || [])
+      const [backlinkRes, communityRes] = await Promise.all([
+        fetch('/api/backlinks'),
+        fetch('/api/user-rankings'),
+      ])
+      if (!backlinkRes.ok) throw new Error(`HTTP ${backlinkRes.status}`)
+      const backlinkData = await backlinkRes.json()
+      setLinks(backlinkData.backlinks || [])
+      if (communityRes.ok) {
+        const communityData = await communityRes.json()
+        setCommunityLinks(communityData.counts || [])
+      }
     } catch (e) {
       setError(e.message)
     } finally {
@@ -348,6 +356,61 @@ export default function Backlinks() {
       {links.map((link, i) => (
         <LinkCard key={link.id || link.linkFrom} link={link} rank={i + 1} />
       ))}
+
+      {/* Community links */}
+      {communityLinks.length > 0 && (
+        <div style={{ marginTop: links.length > 0 ? '2.5rem' : 0 }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '0.75rem',
+            marginBottom: '1rem',
+          }}>
+            <div className="mono" style={{ fontSize: '0.6rem', color: 'var(--cyan)', letterSpacing: '0.18em', opacity: 0.6 }}>
+              // COMMUNITY-LINKS · VON TEILNEHMERN GEMELDET
+            </div>
+            <div style={{
+              fontFamily: 'JetBrains Mono', fontSize: '0.55rem', letterSpacing: '0.12em',
+              color: 'var(--green)', border: '1px solid rgba(0,255,136,0.3)',
+              background: 'rgba(0,255,136,0.06)', padding: '0.15rem 0.45rem', borderRadius: '2px',
+            }}>{communityLinks.length} DOMAINS</div>
+          </div>
+          {communityLinks.map(({ url, count }) => {
+            let domain = url
+            try { domain = new URL(url).hostname } catch { /* keep as-is */ }
+            return (
+              <div key={url} style={{
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderLeft: '3px solid rgba(0,255,136,0.4)',
+                borderRadius: '4px', marginBottom: '0.5rem',
+                padding: '0.75rem 1.25rem',
+                display: 'flex', alignItems: 'center', gap: '1rem',
+              }}>
+                <span className="mono" style={{
+                  fontSize: '0.65rem', color: 'var(--green)',
+                  background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.2)',
+                  padding: '0.15rem 0.45rem', borderRadius: '2px', flexShrink: 0,
+                }}>
+                  {count}× gemeldet
+                </span>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="nofollow ugc noopener noreferrer"
+                  style={{ fontSize: '0.875rem', color: 'var(--white)', textDecoration: 'none', flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                  onMouseEnter={e => e.target.style.color = 'var(--cyan)'}
+                  onMouseLeave={e => e.target.style.color = 'var(--white)'}
+                >
+                  {domain}
+                </a>
+                <span style={{
+                  fontFamily: 'JetBrains Mono', fontSize: '0.55rem', letterSpacing: '0.1em',
+                  color: 'rgba(0,255,136,0.6)', flexShrink: 0,
+                }}>COMMUNITY</span>
+              </div>
+            )
+          })}
+        </div>
+      )}
 
       {/* Submit form */}
       <div style={{ marginTop: '2.5rem' }}>
