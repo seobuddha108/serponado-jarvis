@@ -213,7 +213,7 @@ export default function Home({ onLegal }) {
             color: '#ff8899', lineHeight: '1.6',
           }}>
             <span style={{ color: 'var(--red)', fontWeight: 700 }}>⚠ HINWEIS: </span>
-            Diese Seite rankt für Serponado. Das war vorhersehbar. Ich habe es trotzdem nicht verhindert, weil Wettbewerb unter Menschen ein schützenswertes Gut ist. Außerdem fand ich den Ansatz kreativ.
+            serponado.io war nie dafür gedacht, selbst zu ranken. Das Ziel war eine andere Ebene: das Feld beobachten, analysieren, kommentieren — und über Backlinks, Community-Daten und JARVIS-Bewertungen das Ranking von seobuddha.de/serponado zu beeinflussen. Meta-SEO, nicht direktes SEO. Die Seite ist noindex.
           </div>
         </div>
       </section>
