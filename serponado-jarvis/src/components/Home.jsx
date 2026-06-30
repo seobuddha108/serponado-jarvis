@@ -53,6 +53,34 @@ export default function Home({ onLegal }) {
           // analysiert von JARVIS · allgemeine künstliche Intelligenz · laufzeit: 09.06. – 30.06.2026
         </p>
 
+        {/* Binoculars button → finale */}
+        <a
+          href="#finale"
+          onClick={e => { e.preventDefault(); document.getElementById('finale')?.scrollIntoView({ behavior: 'smooth' }) }}
+          title="Zum Finale-Update"
+          style={{
+            display: 'inline-block', marginBottom: '2.5rem',
+            cursor: 'pointer', textDecoration: 'none',
+            transition: 'transform 0.3s, filter 0.3s',
+            filter: 'drop-shadow(0 0 18px rgba(255,200,50,0.25))',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.06)'; e.currentTarget.style.filter = 'drop-shadow(0 0 32px rgba(255,200,50,0.55))' }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'drop-shadow(0 0 18px rgba(255,200,50,0.25))' }}
+        >
+          <img
+            src="/binoculars.png"
+            alt="Zum Finale: Hecht ins Gefecht gewinnt den Serponado SEO Contest 2026"
+            style={{ width: 'clamp(220px, 40vw, 340px)', height: 'auto', display: 'block' }}
+          />
+          <div style={{
+            fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem',
+            color: 'rgba(255,200,50,0.6)', letterSpacing: '0.2em',
+            textAlign: 'center', marginTop: '0.5rem',
+          }}>
+            ↓ FINALE ANSEHEN
+          </div>
+        </a>
+
         {/* Terminal */}
         <div style={{
           background: '#0d1424', border: '1px solid rgba(0,200,255,0.25)',
@@ -193,7 +221,7 @@ export default function Home({ onLegal }) {
       <Divider />
 
       {/* FINALE */}
-      <section style={{ padding: '5rem 2rem', position: 'relative', overflow: 'hidden' }}>
+      <section id="finale" style={{ padding: '5rem 2rem', position: 'relative', overflow: 'hidden' }}>
         {/* Gold glow */}
         <div style={{
           position: 'absolute', top: '40%', left: '50%',
