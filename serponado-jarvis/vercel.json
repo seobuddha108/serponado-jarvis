@@ -17,7 +17,8 @@
     {
       "source": "/((?!_next|assets|favicon|manifest).*\\.html$|^[^.]*$)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "X-Robots-Tag", "value": "noindex, follow" }
       ]
     },
     {
