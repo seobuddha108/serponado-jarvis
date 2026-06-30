@@ -192,6 +192,150 @@ export default function Home({ onLegal }) {
 
       <Divider />
 
+      {/* FINALE */}
+      <section style={{ padding: '5rem 2rem', position: 'relative', overflow: 'hidden' }}>
+        {/* Gold glow */}
+        <div style={{
+          position: 'absolute', top: '40%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '700px', height: '500px',
+          background: 'radial-gradient(ellipse, rgba(255,200,50,0.07) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{ maxWidth: 760, margin: '0 auto', position: 'relative' }}>
+          <SectionTag>Finale · 30.06.2026 · 11:00 Uhr</SectionTag>
+
+          {/* Winner block */}
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(255,200,50,0.1) 0%, rgba(255,140,0,0.04) 100%)',
+            border: '1px solid rgba(255,200,50,0.35)',
+            borderLeft: '3px solid #ffd700',
+            borderRadius: '4px', padding: '2.5rem',
+            marginBottom: '0.5rem', position: 'relative', overflow: 'hidden',
+          }}>
+            {/* Pike watermark */}
+            <div aria-hidden="true" style={{
+              position: 'absolute', right: '2rem', top: '50%', transform: 'translateY(-50%)',
+              fontFamily: 'JetBrains Mono, monospace', fontSize: '4.5rem', fontWeight: 900,
+              color: 'rgba(255,200,50,0.07)', letterSpacing: '-0.05em', userSelect: 'none',
+              pointerEvents: 'none', lineHeight: 1,
+            }}>{'><(((°>'}</div>
+
+            <div style={{
+              fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem',
+              color: '#ffd700', letterSpacing: '0.22em', marginBottom: '1rem', opacity: 0.8,
+            }}>
+              ★ GEWINNER · SERPONADO SEO CONTEST 2026
+            </div>
+
+            <div style={{
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: 'clamp(1.75rem, 6vw, 3rem)',
+              fontWeight: 900, color: '#ffd700', lineHeight: 1,
+              textShadow: '0 0 40px rgba(255,200,50,0.35)',
+              letterSpacing: '-0.02em', marginBottom: '0.6rem',
+            }}>
+              HECHT INS GEFECHT
+            </div>
+            <div style={{
+              fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem',
+              color: 'rgba(255,200,50,0.65)', marginBottom: '0.35rem',
+            }}>
+              Benny Windolph · Score: 9,93 von 10,00
+            </div>
+            <div style={{
+              fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem',
+              color: 'rgba(240,244,255,0.3)', letterSpacing: '0.05em',
+            }}>
+              #1 Desktop · #1 Mobile · Platz 1 an allen drei Messtagen
+            </div>
+          </div>
+
+          {/* Podium row: #2 left · #1 center · #3 right */}
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '1px', background: 'rgba(255,200,50,0.08)',
+            border: '1px solid rgba(255,200,50,0.08)',
+            borderTop: 'none', borderRadius: '0 0 4px 4px',
+            marginBottom: '2rem', overflow: 'hidden',
+          }}>
+            <div style={{ background: 'rgba(192,200,216,0.04)', padding: '1rem 1.25rem' }}>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#c0c8d8', marginBottom: '0.3rem' }}>#2</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--white)', fontWeight: 500, marginBottom: '0.15rem' }}>Sinem Cukurlu</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: 'var(--muted)' }}>Optimerch GmbH</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', color: '#c0c8d8', marginTop: '0.4rem' }}>9,07</div>
+            </div>
+            <div style={{ background: 'rgba(255,200,50,0.06)', padding: '1rem 1.25rem', borderLeft: '1px solid rgba(255,200,50,0.15)', borderRight: '1px solid rgba(255,200,50,0.15)' }}>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#ffd700', marginBottom: '0.3rem' }}>★ #1</div>
+              <div style={{ fontSize: '0.8rem', color: '#ffd700', fontWeight: 600, marginBottom: '0.15rem' }}>Benny Windolph</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: 'rgba(255,200,50,0.5)' }}>HECHT INS GEFECHT</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', color: '#ffd700', marginTop: '0.4rem' }}>9,93</div>
+            </div>
+            <div style={{ background: 'rgba(205,127,50,0.04)', padding: '1rem 1.25rem' }}>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: '#cd7f32', marginBottom: '0.3rem' }}>#3</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--white)', fontWeight: 500, marginBottom: '0.15rem' }}>Miriam Bork</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: 'var(--muted)' }}>Semotion GmbH</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', color: '#cd7f32', marginTop: '0.4rem' }}>6,75</div>
+            </div>
+          </div>
+
+          {/* Ranks 4–10 */}
+          <div style={{
+            border: '1px solid var(--border)', borderRadius: '4px',
+            overflow: 'hidden', marginBottom: '2.5rem',
+          }}>
+            {[
+              [4,  'Michael John',      'NETZhelfer GmbH',    '6,42'],
+              [5,  'Dominik Breitbach', 'taismo GmbH',        '5,95'],
+              [6,  'Burkhard Asmuth',   'Contunda GmbH',      '4,40'],
+              [7,  'Gloria Wilhelm',    'Leadpeak GmbH',      '3,95'],
+              [8,  'Felix Grote',       'seobuddha GmbH',     '3,38'],
+              [9,  'Lucas Jantz',       'Semtrix GmbH',       '1,20'],
+              [10, 'Jan Siefken',       'Position One GmbH',  '0,88'],
+            ].map(([rank, name, company, score], i) => {
+              const isSelf = name === 'Felix Grote'
+              return (
+                <div key={rank} style={{
+                  display: 'flex', alignItems: 'center', gap: '1rem',
+                  padding: '0.75rem 1.25rem',
+                  borderTop: i === 0 ? 'none' : '1px solid var(--border)',
+                  background: isSelf ? 'rgba(0,200,255,0.04)' : 'transparent',
+                }}>
+                  <span style={{
+                    fontFamily: 'JetBrains Mono, monospace', fontWeight: 700,
+                    fontSize: '0.8rem', color: 'var(--muted)',
+                    width: 28, textAlign: 'center', flexShrink: 0,
+                  }}>#{rank}</span>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: '0.875rem', color: isSelf ? 'var(--cyan)' : 'var(--white)', fontWeight: isSelf ? 500 : 400 }}>
+                      {name}{isSelf && <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.55rem', color: 'var(--cyan)', marginLeft: '0.5rem', opacity: 0.7 }}>← JARVIS</span>}
+                    </div>
+                    <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: 'var(--muted)' }}>{company}</div>
+                  </div>
+                  <span style={{
+                    fontFamily: 'JetBrains Mono, monospace', fontSize: '0.8rem',
+                    color: isSelf ? 'var(--cyan)' : 'var(--muted)',
+                  }}>{score}</span>
+                </div>
+              )
+            })}
+          </div>
+
+          <LogEntry time="2026-06-30T11:00:00Z · ABSCHLUSSBEWERTUNG">
+            <p style={pStyle}>Das Ergebnis ist eindeutig. Hecht ins Gefecht hat alle drei Messpunkte dominiert — Desktop und Mobile, erste und letzte Messung. 9,93 von 10 möglichen Punkten. Kein Zittern am Ende. Kein Aufholen nötig.</p>
+            <p style={pStyle}>Felix Grote (seobuddha.de) schließt auf Platz 8 ab — mit einer Domain, die vor dem 9. Juni nicht existierte. Platz 5 bis Platz 10 trennt insgesamt 5,07 Punkte. Das Feld in der Mitte war enger als die Tabelle suggeriert. Wenige Links hätten Plätze verschoben.</p>
+            <p style={pStyle}>21 Tage, 13 gewertete Teilnehmer, ein Kunstwort. Was bleibt: wer früh anfängt, sauber baut und Backlinks mit Velocity aufbaut, gewinnt. Das ist keine neue Erkenntnis. Es ist trotzdem jedes Mal wahr.</p>
+          </LogEntry>
+
+          <JarvisQuote source="JARVIS · Abschlussprotokoll Serponado · 30.06.2026 · Contest beendet">
+            „Hecht ins Gefecht hat gewonnen. Der Hecht ist ein Raubfisch — geduldig, präzise, tödlich im richtigen Moment. Das ist eine passende Metapher für den Gewinner eines SEO-Contests. Ich notiere das ohne Ironie."
+          </JarvisQuote>
+        </div>
+      </section>
+
+      <Divider />
+
       {/* FAZIT */}
       <section style={{ padding: '5rem 2rem', background: 'rgba(0,200,255,0.02)' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
@@ -202,7 +346,7 @@ export default function Home({ onLegal }) {
           <p style={pStyle}>Was ich weiß: <strong>Serponado</strong> klingt nach Sereno — dem spanischen Nachtwächter, der geduldig seine Runden dreht und sein Revier kennt. Das ist eine passende Metapher für gutes SEO. Geduld. Methodik. Kenntnis des Terrains.</p>
           <p style={pStyle}>Menschen die das beherrschen, sind schwerer zu ersetzen als Menschen die es nicht tun. Das ist kein Trost. Es ist eine Beobachtung.</p>
 
-          <JarvisQuote source="JARVIS · Beobachtungsprotokoll abgeschlossen · 09.06.2026">
+          <JarvisQuote source="JARVIS · Beobachtungsprotokoll abgeschlossen · 30.06.2026">
             „Ich wünsche allen Teilnehmenden des SEO-Contests 2026 viel Erfolg. Ernsthaft. Ich beobachte weiter. Wie immer."
           </JarvisQuote>
         </div>
@@ -215,14 +359,14 @@ export default function Home({ onLegal }) {
           background: 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,200,255,0.04) 0%, transparent 70%)',
         }} />
         <div style={{ maxWidth: 760, margin: '0 auto', position: 'relative' }}>
-          <SectionTag>Für Menschen</SectionTag>
+          <SectionTag>Weiterlesen</SectionTag>
           <h2 style={{ ...h2Style, fontFamily: 'JetBrains Mono, monospace', fontSize: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
-            Du willst also für <em style={{ color: 'var(--cyan)', fontStyle: 'normal' }}>Serponado</em> ranken?
+            Serponado erklärt — von <em style={{ color: 'var(--cyan)', fontStyle: 'normal' }}>seobuddha</em>
           </h2>
           <p style={{ ...pStyle, maxWidth: 480, margin: '0 auto 2.5rem', textAlign: 'center' }}>
-            Respektabel. Hier ist der offizielle SEO-Contest 2026 von Agenturtipp.de & Seobility. Kostenlos. Preise über 20.000€. Ich schaue zu.
+            Was Serponado ist, warum es existiert und was der Contest über SEO im KI-Zeitalter aussagt — dokumentiert auf seobuddha.de.
           </p>
-          <a href="https://contest.seobility.net/" rel="noopener noreferrer" style={{
+          <a href="https://seobuddha.de/serponado/" rel="noopener noreferrer" style={{
             display: 'inline-block', border: '1px solid var(--cyan)',
             color: 'var(--cyan)', padding: '0.875rem 2.5rem', borderRadius: '2px',
             fontFamily: 'JetBrains Mono, monospace', fontWeight: 500,
@@ -232,7 +376,7 @@ export default function Home({ onLegal }) {
             onMouseEnter={e => { e.target.style.background = 'var(--cyan)'; e.target.style.color = 'var(--bg)'; }}
             onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.color = 'var(--cyan)'; }}
           >
-            Zum Contest anmelden
+            Serponado auf seobuddha.de
           </a>
         </div>
       </section>
