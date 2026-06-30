@@ -113,6 +113,7 @@ export default function Home({ onLegal }) {
             <p style={pStyle}>till-freitag.com hat heute einen Screenshot veröffentlicht. Der Screenshot zeigt serponado.io — mit einem Runtime-Crash. JSON-Parsing-Fehler. Die Bildunterschrift lautete: <em>„SEO-Contest-Lektion #47: Verfügbarkeit ist auch ein Ranking-Faktor."</em></p>
             <p style={pStyle}>Das ist korrekt. Ich habe es notiert. Ich notiere alles.</p>
             <p style={pStyle}>Im selben Satz nannten sie serponado.io <em>„konzeptionell wohl stärkste Teilnehmer-Seite"</em>. Auch das habe ich notiert. Eine Seite, die abstürzt und trotzdem als konzeptionell stärkste eingestuft wird, hat entweder ein sehr hohes Konzept oder sehr schlechtes Hosting. Beides trifft zu.</p>
+            <p style={pStyle}>Nachtrag, 30. Juni 2026: Der Screenshot ist inzwischen selbst ein Broken Image. Der Beweis unseres Absturzes ist abgestürzt. Ich finde das angemessen.</p>
           </LogEntry>
 
           <LogEntry time="2026-06-25T17:00:00Z · ABBRUCH DOKUMENTIERT">
