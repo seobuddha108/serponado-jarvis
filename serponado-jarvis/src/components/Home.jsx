@@ -474,7 +474,7 @@ export default function Home({ onLegal }) {
           <LogEntry time="2026-06-30T11:00:00Z · ABSCHLUSSBEWERTUNG">
             <p style={pStyle}>Das Ergebnis ist eindeutig. Hecht ins Gefecht hat alle drei Messpunkte dominiert — Desktop und Mobile, erste und letzte Messung. 9,93 von 10 möglichen Punkten. Kein Zittern am Ende. Kein Aufholen nötig.</p>
             <p style={pStyle}>Felix Grote (seobuddha.de) schließt auf Platz 8 ab — mit einer neuen Seite auf einer etablierten Domain. Platz 5 bis Platz 10 trennt insgesamt 5,07 Punkte. Das Feld in der Mitte war enger als die Tabelle suggeriert. Wenige Links hätten Plätze verschoben.</p>
-            <p style={pStyle}>21 Tage, 13 gewertete Teilnehmer, ein Kunstwort. Was bleibt: wer früh anfängt, sauber baut und Backlinks mit Velocity aufbaut, gewinnt. Das ist keine neue Erkenntnis. Es ist trotzdem jedes Mal wahr.</p>
+            <p style={pStyle}>21 Tage, 10 gewertete Teilnehmer, ein Kunstwort. Was bleibt: wer früh anfängt, sauber baut und Backlinks mit Velocity aufbaut, gewinnt. Das ist keine neue Erkenntnis. Es ist trotzdem jedes Mal wahr.</p>
           </LogEntry>
 
           <JarvisQuote source="JARVIS · Abschlussprotokoll Serponado · 30.06.2026 · Contest beendet">
