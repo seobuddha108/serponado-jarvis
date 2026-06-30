@@ -1,6 +1,116 @@
+import { useState, useRef, useCallback, useEffect } from 'react'
+
+function VortexOverlay({ origin, onDone }) {
+  const canvasRef = useRef(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const ctx = canvas.getContext('2d')
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+
+    let raf
+    const start = performance.now()
+    const dur = 1300
+
+    const draw = (now) => {
+      const raw = Math.min((now - start) / dur, 1)
+      // easeInQuart — slow start, fast finish
+      const t = raw * raw * raw * raw
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      const maxR = Math.hypot(canvas.width, canvas.height) * 1.1
+      const r = t * maxR
+
+      // Expanding dark radial fill
+      const bg = ctx.createRadialGradient(origin.x, origin.y, 0, origin.x, origin.y, r)
+      bg.addColorStop(0,   `rgba(5,8,16,${Math.min(raw * 4, 1)})`)
+      bg.addColorStop(0.6, `rgba(5,8,16,${Math.min(raw * 2.5, 0.97)})`)
+      bg.addColorStop(1,   'rgba(5,8,16,0)')
+      ctx.fillStyle = bg
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      // Spiral arms
+      const numArms = 9
+      const totalRot = raw * Math.PI * 10 // 5 full spins
+      const armAlpha = Math.max(0, 1 - raw * 1.8)
+
+      for (let arm = 0; arm < numArms; arm++) {
+        const base = (arm / numArms) * Math.PI * 2
+        const isCyan = arm % 3 !== 2
+        ctx.beginPath()
+        ctx.strokeStyle = isCyan
+          ? `rgba(0,200,255,${armAlpha * 0.75})`
+          : `rgba(255,200,50,${armAlpha * 0.55})`
+        ctx.lineWidth = Math.max(0.5, 2.5 * (1 - raw))
+
+        const steps = 100
+        for (let s = 0; s <= steps; s++) {
+          const st = s / steps
+          const angle = base + totalRot * st
+          const spiralR = st * r * 0.92
+          const px = origin.x + Math.cos(angle) * spiralR * 0.35
+          const py = origin.y + Math.sin(angle) * spiralR
+          s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
+        }
+        ctx.stroke()
+      }
+
+      // Gold core glow at origin (fades as tornado expands)
+      if (raw < 0.45) {
+        const glowR = (1 - raw / 0.45) * 55
+        const glow = ctx.createRadialGradient(origin.x, origin.y, 0, origin.x, origin.y, glowR)
+        glow.addColorStop(0, `rgba(255,200,50,${(1 - raw / 0.45) * 0.9})`)
+        glow.addColorStop(1, 'rgba(255,200,50,0)')
+        ctx.fillStyle = glow
+        ctx.beginPath()
+        ctx.arc(origin.x, origin.y, glowR, 0, Math.PI * 2)
+        ctx.fill()
+      }
+
+      if (raw < 1) {
+        raf = requestAnimationFrame(draw)
+      } else {
+        onDone?.()
+      }
+    }
+
+    raf = requestAnimationFrame(draw)
+    return () => cancelAnimationFrame(raf)
+  }, [origin, onDone])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{ position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: 'none' }}
+    />
+  )
+}
+
 export default function Home({ onLegal }) {
+  const [vortexActive, setVortexActive] = useState(false)
+  const [vortexOrigin, setVortexOrigin] = useState({ x: 0, y: 0 })
+  const binoRef = useRef(null)
+
+  const handleBinoClick = useCallback((e) => {
+    e.preventDefault()
+    if (!binoRef.current) return
+    const rect = binoRef.current.getBoundingClientRect()
+    // Center of left lens: ~27% from left, ~52% from top
+    setVortexOrigin({ x: rect.left + rect.width * 0.27, y: rect.top + rect.height * 0.52 })
+    setVortexActive(true)
+  }, [])
+
+  const handleVortexDone = useCallback(() => {
+    document.getElementById('finale')?.scrollIntoView({ behavior: 'instant' })
+    setVortexActive(false)
+  }, [])
+
   return (
     <div style={{ fontFamily: "'Inter', sans-serif" }}>
+
+      {vortexActive && <VortexOverlay origin={vortexOrigin} onDone={handleVortexDone} />}
 
       {/* HERO */}
       <section style={{
@@ -53,10 +163,11 @@ export default function Home({ onLegal }) {
           // analysiert von JARVIS · allgemeine künstliche Intelligenz · laufzeit: 09.06. – 30.06.2026
         </p>
 
-        {/* Binoculars button → finale */}
+        {/* Binoculars button → finale via vortex */}
         <a
+          ref={binoRef}
           href="#finale"
-          onClick={e => { e.preventDefault(); document.getElementById('finale')?.scrollIntoView({ behavior: 'smooth' }) }}
+          onClick={handleBinoClick}
           title="Zum Finale-Update"
           style={{
             display: 'inline-block', marginBottom: '2.5rem',
