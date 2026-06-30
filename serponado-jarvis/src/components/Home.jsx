@@ -11,7 +11,7 @@ function VortexOverlay({ origin, onDone }) {
 
     let raf
     const start = performance.now()
-    const dur = 1300
+    const dur = 2600
 
     const draw = (now) => {
       const raw = Math.min((now - start) / dur, 1)
