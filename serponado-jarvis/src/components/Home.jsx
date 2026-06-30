@@ -15,53 +15,56 @@ function VortexOverlay({ origin, onDone }) {
 
     const draw = (now) => {
       const raw = Math.min((now - start) / dur, 1)
-      // easeInQuart — slow start, fast finish
-      const t = raw * raw * raw * raw
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      const maxR = Math.hypot(canvas.width, canvas.height) * 1.1
-      const r = t * maxR
+      const maxR = Math.hypot(canvas.width, canvas.height) * 1.15
 
-      // Expanding dark radial fill
-      const bg = ctx.createRadialGradient(origin.x, origin.y, 0, origin.x, origin.y, r)
-      bg.addColorStop(0,   `rgba(5,8,16,${Math.min(raw * 4, 1)})`)
-      bg.addColorStop(0.6, `rgba(5,8,16,${Math.min(raw * 2.5, 0.97)})`)
-      bg.addColorStop(1,   'rgba(5,8,16,0)')
-      ctx.fillStyle = bg
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      // Dark background: delayed start at 25%, quadratic expand
+      const bgP = Math.max(0, (raw - 0.25) / 0.75)
+      const bgR = bgP * bgP * maxR
+      if (bgR > 0) {
+        const bg = ctx.createRadialGradient(origin.x, origin.y, 0, origin.x, origin.y, bgR)
+        bg.addColorStop(0,   `rgba(5,8,16,${Math.min(bgP * 2.5, 1)})`)
+        bg.addColorStop(0.65,`rgba(5,8,16,${Math.min(bgP * 1.8, 0.96)})`)
+        bg.addColorStop(1,   'rgba(5,8,16,0)')
+        ctx.fillStyle = bg
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+      }
 
-      // Spiral arms
+      // Spiral arms — span full screen from frame 1, fade out near end
       const numArms = 9
-      const totalRot = raw * Math.PI * 10 // 5 full spins
-      const armAlpha = Math.max(0, 1 - raw * 1.8)
+      const totalRot = raw * Math.PI * 10
+      const armAlpha = Math.max(0, 1 - raw * raw * raw * 1.2) // cubic: stays bright long
 
       for (let arm = 0; arm < numArms; arm++) {
         const base = (arm / numArms) * Math.PI * 2
         const isCyan = arm % 3 !== 2
         ctx.beginPath()
         ctx.strokeStyle = isCyan
-          ? `rgba(0,200,255,${armAlpha * 0.75})`
-          : `rgba(255,200,50,${armAlpha * 0.55})`
-        ctx.lineWidth = Math.max(0.5, 2.5 * (1 - raw))
+          ? `rgba(0,200,255,${armAlpha * 0.9})`
+          : `rgba(255,200,50,${armAlpha * 0.75})`
+        ctx.lineWidth = 1.5 + (1 - raw) * 2
 
-        const steps = 100
+        const steps = 120
         for (let s = 0; s <= steps; s++) {
           const st = s / steps
           const angle = base + totalRot * st
-          const spiralR = st * r * 0.92
-          const px = origin.x + Math.cos(angle) * spiralR * 0.35
+          const spiralR = st * maxR * 0.96
+          const squeeze = 0.28 + st * 0.72
+          const px = origin.x + Math.cos(angle) * spiralR * squeeze
           const py = origin.y + Math.sin(angle) * spiralR
           s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
         }
         ctx.stroke()
       }
 
-      // Gold core glow at origin (fades as tornado expands)
-      if (raw < 0.45) {
-        const glowR = (1 - raw / 0.45) * 55
+      // Gold core glow — visible until 60%
+      if (raw < 0.6) {
+        const p = 1 - raw / 0.6
+        const glowR = p * 80
         const glow = ctx.createRadialGradient(origin.x, origin.y, 0, origin.x, origin.y, glowR)
-        glow.addColorStop(0, `rgba(255,200,50,${(1 - raw / 0.45) * 0.9})`)
+        glow.addColorStop(0, `rgba(255,200,50,${p * 0.95})`)
         glow.addColorStop(1, 'rgba(255,200,50,0)')
         ctx.fillStyle = glow
         ctx.beginPath()
